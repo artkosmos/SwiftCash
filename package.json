@@ -1,0 +1,11 @@
+ {
+  "name": "swift-cash",
+  "version": "1.0.0",
+  "description": "Bank app for quick transfers",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Artem Kosmatkov",
+  "license": "ISC"
+}
