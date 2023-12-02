@@ -4,17 +4,15 @@ const MiniCSSPlugin = require('mini-css-extract-plugin')
 const CSSMinimizerPlugin = require('css-minimizer-webpack-plugin')
 const TerserPlugin = require('terser-webpack-plugin')
 const { CleanWebpackPlugin } = require('clean-webpack-plugin')
-const { DefinePlugin } = require('webpack')
 
 require('dotenv').config()
 
 const mode = process.env.NODE_ENV
 const isDev = mode === 'development'
 
+const DirectoryNamedWebpackPlugin = require('directory-named-webpack-plugin');
+
 const plugins = [
-	new DefinePlugin({
-		'process.env': JSON.stringify(process.env)
-	}),
 	new CleanWebpackPlugin(),
 	new HTMLWebpackPlugin({
 		template: 'index.html',
@@ -33,7 +31,7 @@ module.exports = {
 	mode,
 	entry: './index.js',
 	output: {
-		filename: isDev ? '[name].css' : '[name].[contenthash].css',
+		filename: isDev ? '[name].js' : '[name].[contenthash].js',
 		path: path.resolve(__dirname, 'dist'),
 		assetModuleFilename: 'public/[name].[contenthash][ext][query]'
 	},
@@ -41,7 +39,8 @@ module.exports = {
 		extensions: ['.js'],
 		alias: {
 			'@': path.resolve(__dirname, 'src/')
-		}
+		},
+		plugins: [new DirectoryNamedWebpackPlugin(true)]
 	},
 	devtool: isDev ? 'source-map' : false,
 	devServer: {

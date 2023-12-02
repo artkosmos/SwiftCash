@@ -1,0 +1,13 @@
+@import "colors";
+
+@mixin dashboard-block($option: 'big') {
+  margin-top: 30px;
+  background-color: $background;
+  border-radius: 0.7rem;
+
+  @if $option == 'small' {
+    padding: 18px 26px;
+  } @else {
+    padding: 25px 35px;
+  }
+}
