@@ -20,7 +20,7 @@ export class Router {
 	}
 
 	getCurrentPath() {
-		return window.location.href
+		return window.location.pathname
 	}
 
 	#render() {
