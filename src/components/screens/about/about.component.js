@@ -1,4 +1,4 @@
-import { BaseScreen } from 'src/core/base-screen'
+import { BaseScreen } from '@/core/base-screen'
 
 export class About extends BaseScreen{
 	constructor() {
