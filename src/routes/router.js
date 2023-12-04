@@ -1,6 +1,7 @@
 import { NotFound } from '@/components/screens/not-found'
 import { ROUTES } from '@/routes/routes.data'
 import { Layout } from '@/components/layout/layout.component'
+import { $SQuery } from '@/core/customQuery/query.lib'
 
 export class Router {
 	#routes
@@ -24,12 +25,12 @@ export class Router {
 	}
 
 	#render() {
-		const component = new this.#currentRoute.component()
+		const component = new this.#currentRoute.component().render()
 		if (!this.#layout) {
-			this.#layout = new Layout({ router: this, children: component.render() })
-			document.getElementById('app').innerHTML = this.#layout.render()
+			this.#layout = new Layout({ router: this, children: component})
+			$SQuery('#app').append(this.#layout.render())
 		} else {
-			document.getElementById('main').innerHTML = component.render()
+			$SQuery('#content').html('').append(component)
 		}
 	}
 
