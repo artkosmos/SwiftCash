@@ -1,0 +1,17 @@
+@import '@/styles/colors';
+@import '@/styles/animation';
+@import '@/styles/mixins';
+
+.field {
+  @include transition(border-color);
+  background-color: $gray;
+  border-radius: 10px;
+  border: 1px solid transparent;
+  padding: 12px 20px;
+  margin-bottom: 20px;
+  display: block;
+
+  &:focus-within {
+    border-color: rgba($primary, 50%);
+  }
+}

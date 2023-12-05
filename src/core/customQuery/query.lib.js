@@ -1,3 +1,5 @@
+import { formatCardNumber } from '@/core/utils/format-card-number'
+
 class SQuery {
 	/**
 	 * Create a new SQuery instance
@@ -19,11 +21,75 @@ class SQuery {
 
 	/**
 	 * Add onClick event to selected element
-	 * @param callBack
+	 * @param {function(Event): void} callBack
 	 * @returns {SQuery}
 	 */
 	onClick(callBack) {
 		this.element.addEventListener('click', callBack)
+		return this
+	}
+
+	/**
+	 * Set attributes and event listener for input element
+	 * @param {Object} options
+	 * @param {function(Event): void} [options.onInput]
+	 * @param {Object} [options.rest]
+	 * @returns {SQuery}
+	 */
+	setInput({ onInput, ...rest }) {
+		if (this.element.tagName.toLowerCase() !== 'input') {
+			throw new Error('Element is not an input')
+		}
+
+		for (const [key, value] of rest) {
+			this.element.setAttribute(key, value)
+		}
+
+		if (onInput) {
+			this.element.addEventListener('input', onInput)
+		}
+
+		return this
+	}
+
+
+	/**
+	 * Handle input number value
+	 * @param {number} [limit]
+	 * @returns {SQuery}
+	 */
+	numberInput(limit) {
+		if (this.element.type !== 'number' || this.element.tagName.toLowerCase() !== 'input') {
+			throw new Error('This method can\'t apply to current element')
+		}
+		this.element.addEventListener('input', event => {
+			let value = event.target.value.replace(/[^0-9]/g, '')
+			if (limit) {
+				value = value.substring(0, limit)
+			}
+			event.target.value = value
+		})
+
+		return this
+	}
+
+	/**
+	 * Handle credit card number input value
+	 * @returns {SQuery}
+	 */
+	creditCardInput() {
+		const limit = 16
+		if (this.element.type !== 'text' || this.element.tagName.toLowerCase() !== 'input') {
+			throw new Error('Element must be an input with type \'text\'')
+		}
+		this.element.addEventListener('input', event => {
+			let value = event.target.value.replace(/[^0-9]/g, '')
+			if (limit) {
+				value = value.substring(0, limit)
+			}
+			event.target.value = formatCardNumber(value)
+		})
+
 		return this
 	}
 
