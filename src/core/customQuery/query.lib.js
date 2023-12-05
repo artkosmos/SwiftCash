@@ -18,6 +18,56 @@ class SQuery {
 	}
 
 	/**
+	 * Add onClick event to selected element
+	 * @param callBack
+	 * @returns {SQuery}
+	 */
+	onClick(callBack) {
+		this.element.addEventListener('click', callBack)
+		return this
+	}
+
+	/**
+	 * Add classes to selected element
+	 * @param {string | string[]} classNames
+	 * @returns {SQuery}
+	 */
+	addClassName(classNames) {
+		if (Array.isArray(classNames)) {
+			for (const className of classNames) {
+				this.element.classList.add(className)
+			}
+		} else {
+			this.element.classList.add(classNames)
+		}
+
+		return this
+	}
+
+	/**
+	 * Remove class from selected element
+	 * @param {string | string[]} classNames
+	 * @returns {SQuery}
+	 */
+	removeClassName(classNames) {
+		if (Array.isArray(classNames)) {
+			for (const className of classNames) {
+				if (!this.element.classList.contains(className)) {
+					throw new Error('Invalid class name was passed')
+				}
+				this.element.classList.remove(className)
+			}
+		} else {
+			if (!this.element.classList.contains(classNames)) {
+				throw new Error('Invalid class name was passed')
+			}
+			this.element.classList.remove(classNames)
+		}
+
+		return this
+	}
+
+	/**
 	 * Find first element within selected element
 	 * @param {string} selector
 	 * @returns {SQuery}
@@ -78,8 +128,10 @@ class SQuery {
 	html(htmlContent) {
 		if (typeof htmlContent === 'undefined') {
 			return this.element.innerHTML
+		} else {
+			this.element.innerHTML = htmlContent
 		}
-		this.element.innerHTML = htmlContent
+
 		return this
 	}
 }
