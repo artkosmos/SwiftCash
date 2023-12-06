@@ -200,6 +200,23 @@ class SQuery {
 
 		return this
 	}
+
+	/**
+	 * Set or get text of the selected element
+	 * @param {string} [title]
+	 * @returns {SQuery | string}
+	 */
+	text(title) {
+		if (typeof title === 'undefined') {
+			return this.element.textContent
+		} else {
+			this.element.textContent = title
+		}
+
+		return this
+	}
+
+
 }
 
 export function $SQuery(selector) {
