@@ -22,7 +22,7 @@ export class Layout {
 		content.append(this.#children)
 
 		const mainHTML = $SQuery(this.element).find('main')
-		mainHTML.before(new Header().render()).append(content.element)
+		mainHTML.before(new Header({router: this.#router}).render()).append(content.element)
 
 		return this.element
 	}
