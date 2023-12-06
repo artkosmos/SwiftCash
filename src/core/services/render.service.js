@@ -35,7 +35,7 @@ class RenderService {
 			const currentTagName = element.tagName.toLowerCase()
 			if (tagTemplate.test(currentTagName)) {
 				const newComponent = currentTagName
-					.replace('components-', '')
+					.replace('component-', '')
 					.replace(/-/g, '')
 
 				const foundComponent = components.find(Component => {

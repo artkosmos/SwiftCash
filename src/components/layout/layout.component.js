@@ -7,10 +7,12 @@ import { Header } from '@/components/layout/header/header.component'
 export class Layout {
 	#router
 	#children
+	#element
 
 	constructor({ router, children }) {
 		this.#router = router
 		this.#children = children
+		this.#element = null
 	}
 
 	render() {

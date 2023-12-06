@@ -11,3 +11,7 @@
     padding: 25px 35px;
   }
 }
+
+@mixin transition($property: all) {
+  transition: $property 0.3s ease-in-out;
+}
