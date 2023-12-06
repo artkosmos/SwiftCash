@@ -1,0 +1,40 @@
+@import "@/styles/mixins";
+@import "@/styles/colors";
+
+.user-item {
+  padding: 7px 15px;
+  background-color: $background;
+  border-radius: 13px;
+  display: flex;
+  align-items: center;
+  color: $white;
+  font-size: 17px;
+  cursor: pointer;
+
+  &:disabled {
+    cursor: default;
+  }
+
+  &:not(:disabled) {
+    @include transition(background-color);
+
+    &:hover {
+      background-color: lighten($gray, 7%);
+    }
+  }
+
+  .gray {
+    background-color: $gray;
+  }
+
+  > img {
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    margin-right: 5px;
+  }
+
+  > span {
+    margin-left: 5px;
+  }
+}

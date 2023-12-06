@@ -216,6 +216,22 @@ class SQuery {
 		return this
 	}
 
+	/**
+	 * Set or get attribute of the selected element
+	 * @param {string} [attr]
+	 * @param {string | boolean} [value]
+	 * @returns {SQuery | string}
+	 */
+	attribute(attr, value) {
+		if (typeof attr === 'undefined') {
+			return this.element.getAttribute(attr)
+		} else {
+			this.element.setAttribute(attr, value)
+		}
+
+		return this
+	}
+
 
 }
 
