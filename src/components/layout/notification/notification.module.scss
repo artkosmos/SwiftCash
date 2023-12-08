@@ -1,0 +1,36 @@
+.notification {
+  position: fixed;
+  top: 3rem;
+  right: 3rem;
+  background-color: transparent;
+  border-radius: 13px;
+  padding: 12px 22px;
+  box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16);
+  cursor: default;
+  z-index: 5;
+  display: none;
+  animation: slideIn 1s;
+
+  &.success {
+    display: block;
+    background-color: #2e8677;
+  }
+
+  &.error {
+    display: block;
+    background-color: rgb(255, 74, 74);
+  }
+}
+
+@keyframes slideIn {
+  from{
+    transform: translateX(200px);
+    opacity: 0;
+  }
+
+  to {
+    transform: translateX(0);
+    opacity: 1;
+  }
+
+}

@@ -3,6 +3,7 @@ import template from './layout.template.html'
 import styles from './layout.module.scss'
 import { $SQuery } from '@/core/customQuery/query.lib'
 import { Header } from '@/components/layout/header/header.component'
+import { Notification } from '@/components/layout/notification/notification.components'
 
 export class Layout {
 	#router
@@ -16,7 +17,7 @@ export class Layout {
 	}
 
 	render() {
-		this.element = renderService.createElement({ html: template, styles, components: [] })
+		this.element = renderService.createElement({ html: template, styles, components: [Notification] })
 
 		const content = $SQuery(this.element).find('#content')
 		content.append(this.#children)
