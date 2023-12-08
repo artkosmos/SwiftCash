@@ -4,6 +4,7 @@
 .logout {
   > button {
     text-align: center;
+    vertical-align: middle;
     background-color: $background;
     border: none;
     border-radius: 50%;
@@ -12,6 +13,7 @@
     width: 40px;
     height: 40px;
     padding: 2px;
+    cursor: pointer;
 
     &:hover {
       color: $white;

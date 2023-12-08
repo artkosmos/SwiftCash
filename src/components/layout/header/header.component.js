@@ -5,6 +5,7 @@ import template from './header.template.html'
 import { UserItem } from '@/components/ui/user-item/user-item.component'
 import { LogoutButton } from '@/components/layout/header/logout-button/logout-button.component'
 import { Logo } from '@/components/layout/header/logo/logo.component'
+import { Search } from '@/components/layout/header/search/search.component'
 
 export class Header extends ChildComponent {
 	constructor({ router }) {
@@ -20,7 +21,8 @@ export class Header extends ChildComponent {
 						name: 'Artem'
 					}, false, () => alert('click')),
 				new LogoutButton({router: this.router}),
-				Logo
+				Logo,
+				Search
 			] })
 
 

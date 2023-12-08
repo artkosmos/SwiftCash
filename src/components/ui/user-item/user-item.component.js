@@ -31,7 +31,6 @@ export class UserItem extends ChildComponent {
 		}
 	}
 
-
 	render() {
 		this.element = renderService.createElement({ html: template, styles, components: [] })
 

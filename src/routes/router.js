@@ -40,12 +40,12 @@ export class Router {
 
 			if (target) {
 				event.preventDefault()
-				this.#navigate(target.href)
+				this.navigate(target.href)
 			}
 		})
 	}
 
-	#navigate(path) {
+	navigate(path) {
 		if (path !== this.getCurrentPath()) {
 			window.history.pushState({}, '', path)
 			this.#handleCurrentPath()

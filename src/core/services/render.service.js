@@ -4,7 +4,7 @@ class RenderService {
 	/**
 	 * Creates HTML element
 	 * @param {Object} options
-	 * @param {string} options.html
+	 * @param {string | Object} options.html
 	 * @param {Array} options.components
 	 * @param {Object} options.styles
 	 * @returns {HTMLElement || ChildNode}

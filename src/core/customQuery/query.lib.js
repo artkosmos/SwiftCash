@@ -33,16 +33,15 @@ class SQuery {
 	 * Set attributes and event listener for input element
 	 * @param {Object} options
 	 * @param {function(Event): void} [options.onInput]
-	 * @param {Object} [options.rest]
 	 * @returns {SQuery}
 	 */
-	setInput({ onInput, ...rest }) {
+	setInput({onInput, ...rest}) {
 		if (this.element.tagName.toLowerCase() !== 'input') {
 			throw new Error('Element is not an input')
 		}
 
-		for (const [key, value] of rest) {
-			this.element.setAttribute(key, value)
+		for (let key in rest) {
+			this.element.setAttribute(key, rest[key])
 		}
 
 		if (onInput) {
