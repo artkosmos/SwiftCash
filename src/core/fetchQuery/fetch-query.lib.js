@@ -1,4 +1,6 @@
 import { extractErrorMessage } from '@/core/fetchQuery/extract-error-message'
+import { ACCESS_TOKEN } from '@/constants'
+import { NotificationService } from '@/core/services/notification.service'
 
 /**
  * Custom library providing a convenient way to interact with API
@@ -15,7 +17,8 @@ export async function fetchQuery({ path, method = 'GET', body = null, headers = 
 	let error = null
 	let data = null
 	const url = `http://localhost:4200/api${path}`
-	const accessToken = ''
+
+	const accessToken = localStorage.getItem(ACCESS_TOKEN)
 
 	const options = {
 		method,
@@ -41,12 +44,14 @@ export async function fetchQuery({ path, method = 'GET', body = null, headers = 
 				isSuccess(data)
 			}
 		} else {
-			const errorData = response.json()
+			const errorData = await response.json()
 			const errorMessage = extractErrorMessage(errorData)
 			error = errorMessage
 			if (isError) {
 				isError(errorMessage)
 			}
+
+			new NotificationService().showNotification('error', errorMessage)
 		}
 	} catch (e) {
 		const errorMessage = extractErrorMessage(e)
