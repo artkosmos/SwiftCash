@@ -248,6 +248,20 @@ class SQuery {
 
 		return this
 	}
+
+	/**
+	 * Shows the selected element in UI
+	 */
+	show() {
+		this.element.style.removeProperty('display')
+	}
+
+	/**
+	 * Hides the selected element from UI
+	 */
+	hide() {
+		this.element.style.display= 'none'
+	}
 }
 
 export function $SQuery(selector) {

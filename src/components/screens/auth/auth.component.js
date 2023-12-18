@@ -8,6 +8,8 @@ import { $SQuery } from '@/core/customQuery/query.lib'
 import { Field } from '@/components/ui/text-field/text-field.component'
 import formService from '@/core/services/form.service'
 import validationService from '@/core/services/validation.service'
+import { Store } from '@/store/store'
+import { NotificationService } from '@/core/services/notification.service'
 
 export class Auth extends BaseScreen {
 	#isLoginForm = true
@@ -16,6 +18,10 @@ export class Auth extends BaseScreen {
 		super({ title: 'Auth' })
 		this.authService = new AuthService()
 		this.element = null
+		// temporary
+		this.store = Store.getInstance()
+		this.notificationService = new NotificationService()
+		this.user = this.store.state.user
 	}
 
 	#registerHandler(event) {
@@ -51,7 +57,11 @@ export class Auth extends BaseScreen {
 	#submitHandler(event) {
 		const formValues = formService.getFormValues(event.target)
 		if (!this.#validate(formValues)) return
-		console.log(formValues)
+		// const type = this.#isLoginForm ? 'login' : 'register'
+		// this.authService.auth(type, formValues)  backend
+		// temporary
+		this.store.logIn('Artem', 'hjdhslgj75effkHgFrDYTjflsk6473JFjG&dfjwefj')
+		this.notificationService.showNotification('success', 'Loginization is successful')
 	}
 
 	render() {
