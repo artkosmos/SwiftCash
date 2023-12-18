@@ -6,6 +6,8 @@ export class Store {
 	 * @param {Object} initialState
 	 */
 
+	static instance = null
+
 	constructor(initialState) {
 		this.observers = []
 		this.storageService = new LocalStorageService()

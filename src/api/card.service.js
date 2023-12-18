@@ -1,15 +1,13 @@
 import { NotificationService } from '@/core/services/notification.service'
 import { fetchQuery } from '@/core/fetchQuery/fetch-query.lib'
+import { Store } from '@/store/store'
 
 export class CardService {
 	#BASE_URL = '/cards'
 
 	constructor() {
 		this.notificationService = new NotificationService()
-		this.store = {
-			// test
-			userCardNumber: '1234 5678 5678 9843'
-		}
+		this.store = this.store = Store.getInstance()
 	}
 
 	/**

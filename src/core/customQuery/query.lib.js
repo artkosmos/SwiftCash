@@ -223,7 +223,7 @@ class SQuery {
 	 */
 	attribute(attr, value) {
 		if (typeof attr === 'undefined') {
-			return this.element.getAttribute(attr)
+			return this.element.getAttribute('name')
 		} else {
 			this.element.setAttribute(attr, value)
 		}
@@ -231,7 +231,23 @@ class SQuery {
 		return this
 	}
 
+	/**
+	 * Set a submit event
+	 * @param {Function} [onSubmit]
+	 * @returns {SQuery | string}
+	 */
+	submit(onSubmit) {
+		if (this.element.tagName.toLowerCase() === 'form') {
+			this.element.addEventListener('submit', event => {
+				event.preventDefault()
+				onSubmit(event)
+			})
+		} else {
+			throw new Error('Element must be a form')
+		}
 
+		return this
+	}
 }
 
 export function $SQuery(selector) {

@@ -19,6 +19,7 @@
 
   &:hover {
     background-color: lighten($gray, 3%);
+    cursor: pointer;
   }
 
   .green {

@@ -19,12 +19,10 @@ export class Field extends ChildComponent {
 		this.element = renderService.createElement({ html: template, styles, components: [] })
 
 		const inputHTML = $SQuery(this.element).find('input').setInput({
-			rest: {
 				placeholder: this.placeholder,
 				type: this.type,
 				value: this.value,
 				name: this.name
-			}
 		})
 
 		if (this.type === 'number') {
