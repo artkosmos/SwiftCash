@@ -29,7 +29,7 @@ export async function fetchQuery({ path, method = 'GET', body = null, headers = 
 	}
 
 	if (accessToken) {
-		options.headers.Authorization = `Bearer ${accessToken}`
+		options.headers.Authorization = `Bearer ${accessToken.replace(/"/g, '')}`
 	}
 
 	if (body) {

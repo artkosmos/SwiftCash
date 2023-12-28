@@ -12,7 +12,7 @@ export class UserService {
 	getUsers(search, onSuccess) {
 		const queryParams = search ? new URLSearchParams({search}) : ''
 		return fetchQuery({
-			path: `${this.#BASE_URL}?${queryParams}}`,
+			path: `${this.#BASE_URL}?${queryParams}`,
 			isSuccess: onSuccess
 		})
 	}

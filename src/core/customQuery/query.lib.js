@@ -30,6 +30,20 @@ class SQuery {
 	}
 
 	/**
+	 * Add event listener and handler to selected element
+	 * @param {function(Event): void} callBack
+	 * @param {string} event
+	 * @returns {SQuery}
+	 */
+	addListener(event, callBack) {
+		if (typeof event !== 'string' || typeof callBack !== 'function') {
+			throw new Error('Invalid passed parameters')
+		}
+		this.element.addEventListener(event, callBack)
+		return this
+	}
+
+	/**
 	 * Set attributes and event listener for input element
 	 * @param {Object} options
 	 * @param {function(Event): void} [options.onInput]
