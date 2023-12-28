@@ -47,7 +47,6 @@ export class Header extends ChildComponent {
 
 		this.update()
 
-
 		return this.element
 	}
 }

@@ -53,7 +53,7 @@ export class Router {
 	}
 
 	#handleCurrentPath() {
-		const path = this.getCurrentPath() || '/'
+		const path = this.getCurrentPath() || '/login'
 		let route = this.#routes.find(route => route.path === path)
 
 		if (!route) {

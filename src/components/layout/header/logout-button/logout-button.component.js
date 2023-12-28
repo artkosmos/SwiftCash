@@ -9,7 +9,6 @@ export class LogoutButton extends ChildComponent {
 	constructor({ router }) {
 		super()
 		this.store = Store.getInstance()
-		this.user = this.store.state.user
 		this.router = router
 	}
 
@@ -17,7 +16,7 @@ export class LogoutButton extends ChildComponent {
 		this.element = renderService.createElement({ html: template, styles, components: [] })
 
 		$SQuery(this.element).find('button').onClick(() => {
-			this.store.logOut() // temporary
+			this.store.logOut()
 			this.router.navigate('/login')
 		})
 

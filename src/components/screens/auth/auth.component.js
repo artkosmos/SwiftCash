@@ -52,12 +52,12 @@ export class Auth extends BaseScreen {
 		const formValues = formService.getFormValues(event.target)
 		if (!this.#validate(formValues)) return
 		const type = this.#isLoginForm ? 'login' : 'register'
+		console.log(formValues)
 		if (type === 'login') {
-			this.authService.authLogin(formValues)
+			this.authService.logIn(formValues)
 		} else {
-			this.authService.authRegister(formValues)
+			this.authService.logOut(formValues)
 		}
-
 	}
 
 	render() {

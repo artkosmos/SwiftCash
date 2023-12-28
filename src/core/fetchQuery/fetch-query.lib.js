@@ -18,8 +18,6 @@ export async function fetchQuery({ path, method = 'GET', body = null, headers = 
 	let data = null
 	const url = `http://localhost:3000${path}`
 
-	console.log(url)
-
 	const accessToken = localStorage.getItem(ACCESS_TOKEN)
 
 	const options = {

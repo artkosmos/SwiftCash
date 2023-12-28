@@ -35,7 +35,7 @@ class SQuery {
 	 * @param {function(Event): void} [options.onInput]
 	 * @returns {SQuery}
 	 */
-	setInput({onInput, ...rest}) {
+	setInput({ onInput, ...rest }) {
 		if (this.element.tagName.toLowerCase() !== 'input') {
 			throw new Error('Element is not an input')
 		}
@@ -260,7 +260,7 @@ class SQuery {
 	 * Hides the selected element from UI
 	 */
 	hide() {
-		this.element.style.display= 'none'
+		this.element.style.display = 'none'
 	}
 }
 

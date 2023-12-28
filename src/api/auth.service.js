@@ -3,6 +3,8 @@ import { fetchQuery } from '@/core/fetchQuery/fetch-query.lib'
 import { Store } from '@/store/store'
 
 export class AuthService {
+	#LOGIN_URL = '/login'
+	#REGISTER_URL = '/register'
 
 	constructor() {
 		this.store = Store.getInstance()
@@ -14,12 +16,12 @@ export class AuthService {
 	 * @param {any} body
 	 * @returns {Promise<{isLoading: boolean, error: (string|null), data: (*|null)}>}
 	 */
-	authLogin(body) {
+	logIn(body) {
 		return fetchQuery({
-			path: `/login`,
+			path: `${this.#LOGIN_URL}`,
 			body,
 			isSuccess: data => {
-				this.store.logIn(data.username, data.token)
+				this.store.logIn(data)
 				this.notificationService.showNotification('success', 'Loginization is successful')
 			},
 			method: 'POST',
@@ -31,12 +33,13 @@ export class AuthService {
 	 * @param {any} body
 	 * @returns {Promise<{isLoading: boolean, error: (string|null), data: (*|null)}>}
 	 */
-	authRegister(body) {
+	logOut(body) {
 		return fetchQuery({
-			path: `/register`,
+			path: `${this.#REGISTER_URL}`,
 			body,
-			isSuccess: () => {
-				this.notificationService.showNotification('success', 'Registration is successful. try to login')
+			isSuccess: data => {
+				this.store.logIn(data)
+				this.notificationService.showNotification('success', 'Registration is successful')
 			},
 			method: 'POST',
 		})
