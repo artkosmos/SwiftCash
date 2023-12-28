@@ -56,7 +56,7 @@ export class Auth extends BaseScreen {
 		if (type === 'login') {
 			this.authService.logIn(formValues)
 		} else {
-			this.authService.logOut(formValues)
+			this.authService.signUp(formValues)
 		}
 	}
 

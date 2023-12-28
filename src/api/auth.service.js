@@ -33,12 +33,11 @@ export class AuthService {
 	 * @param {any} body
 	 * @returns {Promise<{isLoading: boolean, error: (string|null), data: (*|null)}>}
 	 */
-	logOut(body) {
+	signUp(body) {
 		return fetchQuery({
 			path: `${this.#REGISTER_URL}`,
 			body,
-			isSuccess: data => {
-				this.store.logIn(data)
+			isSuccess: () => {
 				this.notificationService.showNotification('success', 'Registration is successful')
 			},
 			method: 'POST',
