@@ -59,12 +59,11 @@ export class Store {
 	/**
 	 * Login and setting user data
 	 * @param {Object} user
-	 * @param {string} accessToken
 	 */
-	logIn(user, accessToken) {
+	logIn(user) {
 		this.state.user = user
-		this.storageService.set(USER_STORAGE_KEY, user)
-		this.storageService.set(ACCESS_TOKEN, accessToken)
+		this.storageService.set(USER_STORAGE_KEY, user.username)
+		this.storageService.set(ACCESS_TOKEN, user.token)
 	}
 
 	/**

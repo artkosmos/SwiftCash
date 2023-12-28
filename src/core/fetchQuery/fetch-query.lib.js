@@ -16,7 +16,7 @@ export async function fetchQuery({ path, method = 'GET', body = null, headers = 
 	let isLoading = true
 	let error = null
 	let data = null
-	const url = `http://localhost:4200/api${path}`
+	const url = `http://localhost:3000${path}`
 
 	const accessToken = localStorage.getItem(ACCESS_TOKEN)
 
