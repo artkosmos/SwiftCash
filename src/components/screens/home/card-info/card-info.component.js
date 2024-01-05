@@ -5,7 +5,7 @@ import styles from './card-info.module.scss'
 import { Store } from '@/store/store'
 import { CardService } from '@/api/card.service'
 import { $SQuery } from '@/core/customQuery/query.lib'
-import { formatCardNumberStars } from '@/core/utils/format-card-number'
+import { formatCardNumberSpace } from '@/core/utils/format-card-number'
 import { CODE } from '@/constants'
 import { formatCurrency } from '@/core/utils/format-currency'
 
@@ -25,8 +25,13 @@ export class CardInfo extends ChildComponent {
 	#copyCardNumber(e) {
 		navigator.clipboard.writeText(e.target.innerText).then(() => {
 			e.target.innerText = 'Card number copied'
+			e.target.style.color = 'seagreen';
+			e.target.style.fontSize = '14px';
+
 			setTimeout(() => {
-				e.target.innerText = formatCardNumberStars(this.card.number)
+				e.target.innerText = formatCardNumberSpace('4567874534782537') // this.card.number
+				e.target.style.color = 'white';
+				e.target.style.fontSize = '18px';
 			}, 2000)
 		})
 	}
@@ -57,7 +62,7 @@ export class CardInfo extends ChildComponent {
 
 		$SQuery(this.element)
 			.find('#card-number')
-			.text(formatCardNumberStars('4567874534782537')) // this.card.number
+			.text(formatCardNumberSpace('4567874534782537')) // this.card.number
 			.onClick(this.#copyCardNumber.bind(this))
 
 		$SQuery(this.element).find('#card-expire-date').text('02/24') //this.card.expireDate

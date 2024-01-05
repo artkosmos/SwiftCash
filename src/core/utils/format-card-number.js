@@ -8,11 +8,11 @@ export function formatCardNumber(cardNumber) {
 }
 
 /**
- * Format numbers into **** **** **** ****
+ * Format numbers with spaces **** **** **** ****
  * @param {string} cardNumber
  * @return {string}
  */
-export function formatCardNumberStars(cardNumber) {
+export function formatCardNumberSpace(cardNumber) {
 	const formattedNumber = cardNumber.replace(/\s/g, '').match(/.{1,4}/g)
 	return formattedNumber ? formattedNumber.join(' ') : ''
 }
