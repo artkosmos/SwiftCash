@@ -1,3 +1,5 @@
 export const MAIN_TITLE = 'SwiftCash'
 export const USER_STORAGE_KEY = 'user'
 export const ACCESS_TOKEN = 'accessToken'
+export const BALANCE_UPDATED = 'balanceUpdated'
+export const TRANSACTION_COMPLETED = 'transactionCompleted'

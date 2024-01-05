@@ -246,6 +246,20 @@ class SQuery {
 	}
 
 	/**
+	 * Removes attribute of the selected element
+	 * @param {string} attr
+	 * @returns {SQuery | string}
+	 */
+	removeAttribute(attr) {
+		if (typeof attr !== 'string') {
+			throw new Error('Attribute should be a string')
+		}
+
+		this.element.removeAttribute(attr)
+		return this
+	}
+
+	/**
 	 * Set a submit event
 	 * @param {Function} [onSubmit]
 	 * @returns {SQuery | string}
@@ -275,6 +289,20 @@ class SQuery {
 	 */
 	hide() {
 		this.element.style.display = 'none'
+	}
+
+	/**
+	 * Gets or sets value from input
+	 * @param {string} [value]
+	 * @returns {string | SQuery}
+	 */
+	value(value) {
+		if (typeof value === 'undefined') {
+			return this.element.value
+		} else {
+			this.element.value = value
+			return this
+		}
 	}
 }
 

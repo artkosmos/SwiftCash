@@ -1,0 +1,20 @@
+@import '@/styles/mixins';
+
+.actions {
+  @include dashboard-block('small');
+
+  > label {
+    margin-bottom: 16px;
+  }
+
+  > div {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 10px;
+
+    > button {
+      padding: 10px;
+    }
+  }
+}
+
