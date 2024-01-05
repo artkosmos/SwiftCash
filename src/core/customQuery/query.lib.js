@@ -304,6 +304,17 @@ class SQuery {
 			return this
 		}
 	}
+
+	/**
+	 * Find all elements matching the specified selector
+	 * @param {string} selector
+	 * @returns {SQuery[]}
+	 */
+	findAll(selector) {
+		const elements = this.element.querySelectorAll(selector)
+
+		return Array.from(elements).map(element => new SQuery(element))
+	}
 }
 
 export function $SQuery(selector) {
