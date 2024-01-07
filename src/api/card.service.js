@@ -7,7 +7,7 @@ export class CardService {
 
 	constructor() {
 		this.notificationService = new NotificationService()
-		this.store = this.store = Store.getInstance()
+		this.store = Store.getInstance()
 	}
 
 	/**
@@ -24,14 +24,15 @@ export class CardService {
 
 	/**
 	 * Send or get money on the balance
-	 * @param {number} amount
-	 * @param {'top-up' | 'withdraw'} type
+	 * @param {number | string} amount
+	 * @param {'pop-up' | 'withdraw'} type
 	 * @param {Function} onSuccess
 	 * @returns {Promise<{isLoading: boolean, error: (string|null), data: (*|null)}>}
 	 */
 	updateBalance(amount, type, onSuccess) {
+		console.log(this.store.state.card)
 		return fetchQuery({
-			path: `${this.#BASE_URL}/${type}`,
+			path: `${this.#BASE_URL}/${this.store.state.card._id}/${type}`,
 			method: 'PATCH',
 			body: { amount: Number(amount) },
 			isSuccess: () => {

@@ -64,6 +64,7 @@ export class CardInfo extends ChildComponent {
 				if (data?._id) {
 					this.card = data
 					this.fillElements()
+					this.store.updateCard(data)
 				}
 			})
 		}, 0)
@@ -73,7 +74,7 @@ export class CardInfo extends ChildComponent {
 		$SQuery(this.element).html(renderService.createElement({ html: template, styles, components: [] }).innerHTML)
 
 		$SQuery(this.element).findAll(':scope > div').forEach(child => {
-			child.addClassName('fade-in')
+			child.addClassName(styles['fade-in'])
 		})
 
 		$SQuery(this.element)

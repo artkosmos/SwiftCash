@@ -80,9 +80,6 @@ export class Store {
 	 * @param {Object} card
 	 */
 	updateCard(card) {
-		const oldUser = this.state.user
-		const newUser = {...oldUser, card}
-		this.state.user = newUser
-		this.storageService.set(USER_STORAGE_KEY, newUser)
+		this.state.card = card
 	}
 }

@@ -22,11 +22,13 @@ export class Actions extends ChildComponent {
 	updateBalance(event, type) {
 		event.preventDefault()
 
-		if (this.store.state.user) {
+		if (!this.store.state.user) {
 			this.notifications.showNotification('error', 'You are not authorized')
 		}
 
-		$SQuery(event.target).text('Sending...').attribute('disabled', true)
+		const currentElement = event.target
+
+		$SQuery(currentElement).text('Sending...').attribute('disabled', true)
 		const currentInput = $SQuery(this.element).find('input')
 		const amount = currentInput.value()
 
@@ -34,8 +36,10 @@ export class Actions extends ChildComponent {
 			validationService.showError($SQuery(this.element).find('label'))
 		}
 
-		this.cardService.updateBalance(+amount, type, () => {
+		this.cardService.updateBalance(amount, type, () => {
 			currentInput.value('')
+
+			$SQuery(currentElement).text('Top-up').removeAttribute('disabled')
 
 			const balanceUpdatedEvent = new Event(BALANCE_UPDATED)
 			document.dispatchEvent(balanceUpdatedEvent)
@@ -51,7 +55,7 @@ export class Actions extends ChildComponent {
 
 		$SQuery(this.element)
 			.find('#action-buttons')
-			.append(new Button({children: 'Top-up', variant: 'green', onClick: e => this.updateBalance(e, 'top-up')}).render())
+			.append(new Button({children: 'Top-up', variant: 'green', onClick: e => this.updateBalance(e, 'pop-up')}).render())
 			.append(new Button({children: 'Withdraw', variant: 'purple', onClick: e => this.updateBalance(e, 'withdraw')}).render())
 
 		return this.element
