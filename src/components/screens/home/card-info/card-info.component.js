@@ -6,7 +6,7 @@ import { Store } from '@/store/store'
 import { CardService } from '@/api/card.service'
 import { $SQuery } from '@/core/customQuery/query.lib'
 import { formatCardNumberSpace } from '@/core/utils/format-card-number'
-import { CODE } from '@/constants'
+import { BALANCE_UPDATED, CODE } from '@/constants'
 import { formatCurrency } from '@/core/utils/format-currency'
 
 export class CardInfo extends ChildComponent {
@@ -20,6 +20,23 @@ export class CardInfo extends ChildComponent {
 			styles,
 			components: []
 		})
+		this.#addListeners()
+	}
+
+	#addListeners() {
+		document.addEventListener(BALANCE_UPDATED, this.#onBalanceUpdated)
+	}
+
+	#removeListeners() {
+		document.removeEventListener(BALANCE_UPDATED, this.#onBalanceUpdated)
+	}
+
+	#onBalanceUpdated = () => {
+		this.fetchData()
+	}
+
+	#destroy() {
+		this.#removeListeners()
 	}
 
 	#copyCardNumber(e) {
@@ -29,7 +46,7 @@ export class CardInfo extends ChildComponent {
 			e.target.style.fontSize = '14px';
 
 			setTimeout(() => {
-				e.target.innerText = formatCardNumberSpace('4567874534782537') // this.card.number
+				e.target.innerText = formatCardNumberSpace(this.card.cardNumber)
 				e.target.style.color = 'white';
 				e.target.style.fontSize = '18px';
 			}, 2000)
@@ -38,19 +55,18 @@ export class CardInfo extends ChildComponent {
 
 	#toggleCVC(cvcElement) {
 		const text = cvcElement.text()
-		text === CODE ? cvcElement.text(853) : cvcElement.text(CODE) // this.card.cvcElement
+		text === CODE ? cvcElement.text(this.card.cvv) : cvcElement.text(CODE)
 	}
 
 	fetchData() {
-		this.cardService.myCard(data => {
-			if (data?.id) {
-				this.card = data
-				this.fillElements()
-				this.store.updateCard(data)
-			} else {
-				this.store.updateCard(null)
-			}
-		})
+		setTimeout(() => {
+			this.cardService.myCard(data => {
+				if (data?._id) {
+					this.card = data
+					this.fillElements()
+				}
+			})
+		}, 0)
 	}
 
 	fillElements() {
@@ -62,24 +78,23 @@ export class CardInfo extends ChildComponent {
 
 		$SQuery(this.element)
 			.find('#card-number')
-			.text(formatCardNumberSpace('4567874534782537')) // this.card.number
+			.text(formatCardNumberSpace(this.card.cardNumber))
 			.onClick(this.#copyCardNumber.bind(this))
 
-		$SQuery(this.element).find('#card-expire-date').text('02/24') //this.card.expireDate
+		$SQuery(this.element).find('#card-expire-date').text(this.card.expirationDate)
 
 		const cvcElement = $SQuery(this.element).find('#card-cvc')
 		cvcElement.text(CODE).style('width', '35px')
 
 		$SQuery(this.element).find('#toggle-cvc').onClick(this.#toggleCVC.bind(this, cvcElement))
 
-		$SQuery(this.element).find('#card-balance').text(formatCurrency(3285)) //this.card.balance
+		$SQuery(this.element).find('#card-balance').text(formatCurrency(this.card.balance))
 	}
 
 	render() {
-		// if (this.store.state.user) {
-		// 	this.fetchData()
-		// }
-		this.fillElements()
+		if (this.store.state.user) {
+			this.fetchData()
+		}
 		return this.element
 	}
 }

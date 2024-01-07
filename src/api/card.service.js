@@ -3,7 +3,7 @@ import { fetchQuery } from '@/core/fetchQuery/fetch-query.lib'
 import { Store } from '@/store/store'
 
 export class CardService {
-	#BASE_URL = '/cards'
+	#BASE_URL = '/my-card'
 
 	constructor() {
 		this.notificationService = new NotificationService()

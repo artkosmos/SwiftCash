@@ -9,7 +9,6 @@ import { Logo } from '@/components/layout/header/logo/logo.component'
 import { Search } from '@/components/layout/header/search/search.component'
 import { Store } from '@/store/store'
 import { $SQuery } from '@/core/customQuery/query.lib'
-import { USER_STORAGE_KEY } from '@/constants'
 
 export class Header extends ChildComponent {
 	constructor({ router }) {
@@ -21,7 +20,7 @@ export class Header extends ChildComponent {
 		this.currentUser = new UserItem(
 			{
 				avatar: unknown_user,
-				username: localStorage.getItem(USER_STORAGE_KEY).replace(/"/g, '')
+				username: 'unknown'
 			}, false)
 	}
 
@@ -30,12 +29,13 @@ export class Header extends ChildComponent {
 
 		const privateElements = $SQuery(this.element).find('#auth-side')
 
-		if (this.user && this.router.getCurrentPath() === '/login') {
+		if (this.user) {
 			privateElements.show()
 			this.currentUser.update(this.user)
 			this.router.navigate('/')
 		} else {
 			privateElements.hide()
+			this.router.navigate('/login')
 		}
 	}
 
@@ -49,8 +49,9 @@ export class Header extends ChildComponent {
 			]
 		})
 
-		// line below causes problem with building app
-		// this.update()
+		setTimeout(() => {
+			this.update()
+		}, 0)
 
 		return this.element
 	}
