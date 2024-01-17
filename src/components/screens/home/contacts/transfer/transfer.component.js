@@ -40,9 +40,19 @@ export class Transfer extends ChildComponent {
 		if (!cardNumber) {
 			validationService.showError($SQuery(this.element).find('label'))
 			reset()
+			return
+		}
+
+		if (!inputElement.value()) {
+			validationService.showError($SQuery(this.element).find('label'))
+			return
 		}
 
 		let amount = prompt('Enter transfer amount below')
+
+		if (!amount) {
+			return
+		}
 
 		this.cardService.transfer({ amount, cardNumber }, () => {
 			inputElement.value('')
