@@ -10,9 +10,9 @@ class RenderService {
 	 * @returns {HTMLElement || ChildNode}
 	 */
 	createElement(options) {
-		const template = document.createElement('template')
-		template.innerHTML = options.html.trim()
-		const element = template.content.firstChild
+		const parser = new DOMParser()
+		const doc = parser.parseFromString(options.html, 'text/html')
+		const element = doc.body.firstChild
 
 		if (options.styles) {
 			this.#applyModuleStyles(options.styles, element)

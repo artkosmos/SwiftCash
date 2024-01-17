@@ -46,18 +46,18 @@ export class CardService {
 	 * Executes a transaction from one card to another
 	 * @param {Object} body
 	 * @param {number} body.amount
-	 * @param {string} body.toCardNumber
+	 * @param {string} body.cardNumber
 	 * @param {Function} onSuccess
 	 * @returns {Promise<{isLoading: boolean, error: (string|null), data: (*|null)}>}
 	 */
-	transfer({ amount, toCardNumber }, onSuccess) {
+	transfer({ amount, cardNumber }, onSuccess) {
 		return fetchQuery({
-			path: `${this.#BASE_URL}`,
+			path: `${this.#BASE_URL}/${this.store.state.card._id}/transfer`,
 			method: 'PATCH',
 			body: {
 				amount: Number(amount),
-				fromCardNumber: this.store.userCardNumber,
-				toCardNumber
+				fromCardNumber: this.store.state.cardNumber,
+				cardNumber
 			},
 			isSuccess: () => {
 				this.notificationService.showNotification('success', 'Your transaction passed successfully')

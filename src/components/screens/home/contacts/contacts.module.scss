@@ -1,0 +1,21 @@
+@import "src/styles/mixins";
+@import "@/styles/animation";
+
+.contacts {
+  @include dashboard-block('small');
+
+  > div:last-child {
+    button {
+      margin-bottom: 16px;
+      width: 100%;
+
+      &:last-child {
+        margin-bottom: 0;
+      }
+    }
+  }
+}
+
+.fade-in {
+  animation: fadeIn 0.9s;
+}

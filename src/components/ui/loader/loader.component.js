@@ -1,7 +1,6 @@
 import ChildComponent from '@/core/base-screen/child.component'
 import renderService from '@/core/services/render.service'
 import template from './loader.template.html'
-import { $SQuery } from '@/core/customQuery/query.lib'
 
 export const LOADER_SELECTOR = ['data-component="loader"']
 
@@ -16,10 +15,8 @@ export class Loader extends ChildComponent {
 	render() {
 		this.element = renderService.createElement({ html: template, styles: {}, components: [] })
 
-		$SQuery(this.element)
-			.style('width', `${this.width}`)
-			.style('height', `${this.height}`)
-			.addClassName('bounce')
+		this.element.style = `width: ${this.width}px; height: ${this.height}px`
+		this.element.classList.add('bounce')
 
 		return this.element
 	}

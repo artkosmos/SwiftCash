@@ -6,6 +6,7 @@ import ChildComponent from '@/core/base-screen/child.component'
 import { UserService } from '@/api/user.service'
 import { UserItem } from '@/components/ui/user-item/user-item.component'
 import { debounce } from '@/core/utils/debounce'
+import { formatCardNumber } from '@/core/utils/format-card-number'
 
 export class Search extends ChildComponent {
 	constructor() {
@@ -26,6 +27,8 @@ export class Search extends ChildComponent {
 			users.forEach((user, index) => {
 				const userItem = new UserItem(
 					user, true, () => {
+						$SQuery('[name="card-number"]').value(formatCardNumber(user.cardInfo.cardNumber))
+
 						displayResultElement.html('')
 					}).render()
 				$SQuery(userItem).addClassName(styles.item).style('transition-delay', `${index * 0.1}s`)

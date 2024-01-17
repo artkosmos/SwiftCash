@@ -14,10 +14,6 @@ export class Router {
 		this.#layout = null
 		this.#handleCurrentPath()
 		this.#handleLink()
-		//обработка событий вперед\назад в браузере
-		window.addEventListener('popstate', () => {
-			this.#handleCurrentPath()
-		})
 	}
 
 	getCurrentPath() {
