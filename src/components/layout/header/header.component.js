@@ -9,6 +9,7 @@ import { Logo } from '@/components/layout/header/logo/logo.component'
 import { Search } from '@/components/layout/header/search/search.component'
 import { Store } from '@/store/store'
 import { $SQuery } from '@/core/customQuery/query.lib'
+import { LocalStorageService } from '@/core/services/localStorage.service'
 
 export class Header extends ChildComponent {
 	constructor({ router }) {
@@ -17,10 +18,11 @@ export class Header extends ChildComponent {
 		this.store.addObserver(this)
 		this.user = null
 		this.router = router
+		this.localStorageService = new LocalStorageService()
 		this.currentUser = new UserItem(
 			{
 				avatar: unknown_user,
-				username: 'unknown'
+				username: this.localStorageService.get('user') || 'unknown'
 			}, false)
 	}
 
