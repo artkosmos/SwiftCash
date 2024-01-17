@@ -39,7 +39,7 @@ export class Actions extends ChildComponent {
 		this.cardService.updateBalance(amount, type, () => {
 			currentInput.value('')
 
-			$SQuery(currentElement).text('Top-up').removeAttribute('disabled')
+			$SQuery(currentElement).text(type === 'pop-up' ? 'Top-up' : 'Withdraw').removeAttribute('disabled')
 
 			const balanceUpdatedEvent = new Event(BALANCE_UPDATED)
 			document.dispatchEvent(balanceUpdatedEvent)
