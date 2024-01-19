@@ -9,7 +9,7 @@ import { Field } from '@/components/ui/text-field/text-field.component'
 import { $SQuery } from '@/core/customQuery/query.lib'
 import { Button } from '@/components/ui/button/button.component'
 import validationService from '@/core/services/validation.service'
-import { BALANCE_UPDATED } from '@/constants'
+import { BALANCE_UPDATED, TRANSACTION_COMPLETED } from '@/constants'
 
 export class Actions extends ChildComponent {
 	constructor() {
@@ -42,7 +42,9 @@ export class Actions extends ChildComponent {
 			$SQuery(currentElement).text(type === 'pop-up' ? 'Top-up' : 'Withdraw').removeAttribute('disabled')
 
 			const balanceUpdatedEvent = new Event(BALANCE_UPDATED)
+			const transactionCompletedEvent = new Event(TRANSACTION_COMPLETED)
 			document.dispatchEvent(balanceUpdatedEvent)
+			document.dispatchEvent(transactionCompletedEvent)
 		})
 	}
 
