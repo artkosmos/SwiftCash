@@ -10,8 +10,10 @@ export class TransactionService {
 	 */
 	getTransactions(onSuccess) {
 		return fetchQuery({
-			path: `${this.#BASE_URL}?${new URLSearchParams({orderBy: 'desc'})}}`,
+			path: `${this.#BASE_URL}`,
 			isSuccess: onSuccess
 		})
 	}
 }
+
+	// ?${new URLSearchParams({orderBy: 'desc'})}}

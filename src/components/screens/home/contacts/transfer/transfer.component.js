@@ -73,8 +73,6 @@ export class Transfer extends ChildComponent {
 			]
 		})
 
-		console.log(this.store.state.user)
-
 		return this.element
 	}
 }

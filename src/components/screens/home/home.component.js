@@ -5,6 +5,7 @@ import renderService from '@/core/services/render.service'
 import { Actions } from '@/components/screens/home/actions/action.component'
 import { CardInfo } from '@/components/screens/home/card-info/card-info.component'
 import { Contacts } from '@/components/screens/home/contacts/contacts.component'
+import { Transactions } from '@/components/screens/home/transactions/transactions.component'
 
 export class Home extends BaseScreen {
 	constructor() {
@@ -13,7 +14,7 @@ export class Home extends BaseScreen {
 	}
 
 	render() {
-		this.element = renderService.createElement({ html: template, styles, components: [Actions, CardInfo, Contacts] })
+		this.element = renderService.createElement({ html: template, styles, components: [Actions, CardInfo, Contacts, Transactions] })
 
 		return this.element
 	}

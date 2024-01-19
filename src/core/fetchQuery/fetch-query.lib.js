@@ -40,6 +40,7 @@ export async function fetchQuery({ path, method = 'GET', body = null, headers = 
 		const response = await fetch(url, options)
 		if (response.ok) {
 			data = await response.json()
+
 			if (isSuccess) {
 				isSuccess(data)
 			}

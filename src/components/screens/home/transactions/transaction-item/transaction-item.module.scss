@@ -1,0 +1,101 @@
+@import "@/styles/mixins";
+@import "@/styles/colors";
+
+.transaction-item {
+  @include transition(background-color);
+  display: grid;
+  grid-template-columns: 2fr 2fr 1fr;
+  font-size: 20px;
+  padding: 24px 0;
+  border-bottom: 1px solid rgba($text, 20%);
+  cursor: default;
+  border-radius: 12px;
+  animation: slideIn 0.7s;
+
+  &:hover {
+    background-color: rgba($text, 7%);
+
+    > div:nth-child(1) > div {
+      opacity: 1;
+    }
+  }
+
+  &:last-child {
+    border-bottom: none;
+  }
+
+  &.income {
+    > div:nth-child(1) {
+      > div {
+        background-color: $secondary;
+      }
+    }
+  }
+
+  > div {
+    display: flex;
+    align-items: center;
+
+    &:nth-child(1) {
+      margin-left: 16px;
+
+      > div {
+        @include transition(opacity);
+        background-color: $primary;
+        border-radius: 50%;
+        width: 45px;
+        height: 45px;
+        display: flex;
+        margin-right: 16px;
+        opacity: 0.9;
+        align-items: center;
+        justify-content: center;
+
+        > svg {
+          color: $background;
+          width: 32px;
+          height: 32px;
+        }
+      }
+    }
+
+    &:nth-child(2) {
+      > div {
+        display: flex;
+        align-items: center;
+
+        > svg {
+          color: $text;
+          width: 25px;
+          height: 25px;
+        }
+      }
+
+      > span {
+        color: lighten($text, 8%);
+        font-size: 18px;
+        margin-left: 10px;
+      }
+    }
+  }
+}
+
+@keyframes slideIn {
+  from {
+    opacity: 0;
+    transform: translateX(-50px);
+  }
+
+  70% {
+    transform: translateX(20px);
+  }
+
+  90% {
+    opacity: 1;
+  }
+
+  to {
+    transform: translateX(0);
+  }
+
+}
