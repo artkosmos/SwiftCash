@@ -28,13 +28,15 @@ export class Actions extends ChildComponent {
 
 		const currentElement = event.target
 
-		$SQuery(currentElement).text('Sending...').attribute('disabled', true)
 		const currentInput = $SQuery(this.element).find('input')
 		const amount = currentInput.value()
 
 		if (!amount) {
 			validationService.showError($SQuery(this.element).find('label'))
+			return
 		}
+
+		$SQuery(currentElement).text('Sending...').attribute('disabled', true)
 
 		this.cardService.updateBalance(amount, type, () => {
 			currentInput.value('')
