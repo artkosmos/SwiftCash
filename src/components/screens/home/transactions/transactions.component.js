@@ -8,6 +8,7 @@ import { TransactionService } from '@/api/transaction.service'
 import { TRANSACTION_COMPLETED } from '@/constants'
 import { $SQuery } from '@/core/customQuery/query.lib'
 import { TransactionItem } from '@/components/screens/home/transactions/transaction-item/transaction-item.component'
+import { Loader } from '@/components/ui/loader/loader.component'
 
 export class Transactions extends ChildComponent {
 	constructor() {
@@ -52,7 +53,6 @@ export class Transactions extends ChildComponent {
 
 	render() {
 		if (this.store.state.user) {
-			// $SQuery(this.element).append(new Loader().render())
 			setTimeout(() => {
 				this.fetchData()
 			}, 0)

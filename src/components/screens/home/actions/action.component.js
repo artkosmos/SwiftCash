@@ -10,6 +10,7 @@ import { $SQuery } from '@/core/customQuery/query.lib'
 import { Button } from '@/components/ui/button/button.component'
 import validationService from '@/core/services/validation.service'
 import { BALANCE_UPDATED, TRANSACTION_COMPLETED } from '@/constants'
+import { Heading } from '@/components/ui/heading/heading.component'
 
 export class Actions extends ChildComponent {
 	constructor() {
@@ -41,7 +42,7 @@ export class Actions extends ChildComponent {
 		this.cardService.updateBalance(amount, type, () => {
 			currentInput.value('')
 
-			$SQuery(currentElement).text(type === 'pop-up' ? 'Top-up' : 'Withdraw').removeAttribute('disabled')
+			$SQuery(currentElement).text(type === 'pop-up' ? 'Pop-up' : 'Withdraw').removeAttribute('disabled')
 
 			const balanceUpdatedEvent = new Event(BALANCE_UPDATED)
 			const transactionCompletedEvent = new Event(TRANSACTION_COMPLETED)
@@ -54,12 +55,12 @@ export class Actions extends ChildComponent {
 		this.element = renderService.createElement({
 			html: template,
 			styles,
-			components: [new Field({ name: 'amount', placeholder: 'Enter amount', type: 'number' })]
+			components: [new Field({ name: 'amount', placeholder: 'Enter amount', type: 'number' }), new Heading('Deposit / withdraw money')]
 		})
 
 		$SQuery(this.element)
 			.find('#action-buttons')
-			.append(new Button({children: 'Top-up', variant: 'green', onClick: e => this.updateBalance(e, 'pop-up')}).render())
+			.append(new Button({children: 'Pop-up', variant: 'green', onClick: e => this.updateBalance(e, 'pop-up')}).render())
 			.append(new Button({children: 'Withdraw', variant: 'purple', onClick: e => this.updateBalance(e, 'withdraw')}).render())
 
 		return this.element

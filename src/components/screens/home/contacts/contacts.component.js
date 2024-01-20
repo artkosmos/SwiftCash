@@ -9,6 +9,7 @@ import { UserService } from '@/api/user.service'
 import { $SQuery } from '@/core/customQuery/query.lib'
 import { UserItem } from '@/components/ui/user-item/user-item.component'
 import { formatCardNumber } from '@/core/utils/format-card-number'
+import { Loader } from '@/components/ui/loader/loader.component'
 
 export class Contacts extends ChildComponent {
 	constructor() {
@@ -23,6 +24,12 @@ export class Contacts extends ChildComponent {
 		this.userService.getUsers('', data => {
 			if (!data) {
 				return
+			}
+
+			const loader = this.element.querySelector('.loader')
+
+			if (loader) {
+				loader.style.display = 'none'
 			}
 
 			for (const user of data) {
@@ -45,6 +52,7 @@ export class Contacts extends ChildComponent {
 		})
 
 		if(this.store.state.user) {
+			$SQuery(this.element).append(new Loader().render())
 			setTimeout(() => {
 				this.fetchData()
 			}, [])

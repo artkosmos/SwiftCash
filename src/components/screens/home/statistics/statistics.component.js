@@ -38,15 +38,11 @@ export class Statistics extends ChildComponent {
 	fetchData() {
 		this.statisticService.getStatistic(data => {
 
-			console.log(data)
-
 			const statisticItems = $SQuery(this.element).find('#statistic-items')
 			statisticItems.text('')
 
 			// const statisticCircle = $SQuery(this.element).find('#circle-statistic')
 			// statisticItems.text('')
-
-			console.log(typeof data.statistic.income)
 
 			statisticItems
 				.append(new StatisticItem('Income:', String(data.statistic.income), 'green').render())

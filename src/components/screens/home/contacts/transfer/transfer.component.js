@@ -51,6 +51,7 @@ export class Transfer extends ChildComponent {
 		let amount = prompt('Enter transfer amount below')
 
 		if (!amount) {
+			reset()
 			return
 		}
 
