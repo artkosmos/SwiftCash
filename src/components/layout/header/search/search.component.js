@@ -40,6 +40,11 @@ export class Search extends ChildComponent {
 		})
 	}
 
+	#handleBlur() {
+		const displayResultElement = $SQuery(this.element).find('#search-results')
+		displayResultElement.html('')
+	}
+
 	render() {
 		this.element = renderService.createElement({ html: template, styles, components: [] })
 
@@ -49,6 +54,7 @@ export class Search extends ChildComponent {
 			.find('input')
 			.setInput({ type: 'search', name: 'search', placeholder: 'Search contacts...' })
 			.addListener('input', debouncedSearch)
+			.addListener('blur', this.#handleBlur.bind(this))
 
 		return this.element
 	}

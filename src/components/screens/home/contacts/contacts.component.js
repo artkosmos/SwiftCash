@@ -35,7 +35,7 @@ export class Contacts extends ChildComponent {
 			for (const user of data) {
 				$SQuery(this.element)
 					.find('#contacts-list')
-					.append(new UserItem(user, true, () => {
+					.append(new UserItem(user, false, () => {
 						$SQuery('[name="card-number"]').value(formatCardNumber(user.cardInfo.cardNumber))
 					}).render())
 			}

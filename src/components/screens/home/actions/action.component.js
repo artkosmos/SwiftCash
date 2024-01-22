@@ -37,7 +37,7 @@ export class Actions extends ChildComponent {
 			return
 		}
 
-		if (this.store.state.card.balance - amount < 0) {
+		if (type === 'withdraw' && this.store.state.card.balance - amount < 0) {
 			validationService.showError($SQuery(this.element).find('label'))
 			this.notifications.showNotification('error', 'You don\'t have enough money for this transaction')
 			return
