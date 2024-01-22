@@ -52,7 +52,7 @@ export class Contacts extends ChildComponent {
 		})
 
 		if(this.store.state.user) {
-			$SQuery(this.element).append(new Loader().render())
+			$SQuery(this.element).append(new Loader(80, 80).render())
 			setTimeout(() => {
 				this.fetchData()
 			}, [])

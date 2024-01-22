@@ -18,7 +18,7 @@ export class Transfer extends ChildComponent {
 		this.element = null
 		this.store = Store.getInstance()
 		this.cardService = new CardService()
-		this.notification = new NotificationService()
+		this.notifications = new NotificationService()
 	}
 
 	transferHandler(event) {
@@ -51,6 +51,13 @@ export class Transfer extends ChildComponent {
 		let amount = prompt('Enter transfer amount below')
 
 		if (!amount) {
+			reset()
+			return
+		}
+
+		if (this.store.state.card.balance - amount < 0) {
+			validationService.showError($SQuery(this.element).find('label'))
+			this.notifications.showNotification('error', 'You don\'t have enough money for this transaction')
 			reset()
 			return
 		}

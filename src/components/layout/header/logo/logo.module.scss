@@ -1,6 +1,10 @@
 @import "@/styles/colors";
 
 .logo {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+
   > a {
     color: $white;
     font-weight: 600;
