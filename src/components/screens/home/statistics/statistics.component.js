@@ -8,6 +8,7 @@ import { TRANSACTION_COMPLETED } from '@/constants'
 import { $SQuery } from '@/core/customQuery/query.lib'
 import { StatisticService } from '@/api/statistic.service'
 import { StatisticItem } from '@/components/screens/home/statistics/statistic-item/statistic-item.component'
+import { Loader } from '@/components/ui/loader/loader.component'
 
 export class Statistics extends ChildComponent {
 	constructor() {
@@ -31,18 +32,24 @@ export class Statistics extends ChildComponent {
 		this.fetchData()
 	}
 
-	#destroy() {
+	destroy() {
 		this.#removeListeners()
 	}
 
 	fetchData() {
 		this.statisticService.getStatistic(data => {
+			if (!data) {
+				return
+			}
+
+			const loader = this.element.querySelector('.loader')
+
+			if (loader) {
+				loader.style.display = 'none'
+			}
 
 			const statisticItems = $SQuery(this.element).find('#statistic-items')
 			statisticItems.text('')
-
-			// const statisticCircle = $SQuery(this.element).find('#circle-statistic')
-			// statisticItems.text('')
 
 			statisticItems
 				.append(new StatisticItem('Income:', String(data.statistic.income), 'green').render())
@@ -52,6 +59,7 @@ export class Statistics extends ChildComponent {
 
 	render() {
 		if (this.store.state.user) {
+			$SQuery(this.element).append(new Loader(80, 80).render())
 			setTimeout(() => {
 				this.fetchData()
 			}, 0)

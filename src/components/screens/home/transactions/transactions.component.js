@@ -31,12 +31,21 @@ export class Transactions extends ChildComponent {
 		this.fetchData()
 	}
 
-	#destroy() {
+	destroy() {
 		this.#removeListeners()
 	}
 
 	fetchData() {
 		this.transactionService.getTransactions(data => {
+			if (!data) {
+				return
+			}
+
+			const loader = this.element.querySelector('.loader')
+
+			if (loader) {
+				loader.style.display = 'none'
+			}
 
 			const listOfTransactions = $SQuery(this.element).find('#transactions-list')
 			listOfTransactions.text('')
@@ -53,6 +62,7 @@ export class Transactions extends ChildComponent {
 
 	render() {
 		if (this.store.state.user) {
+			$SQuery(this.element).append(new Loader(80, 80).render())
 			setTimeout(() => {
 				this.fetchData()
 			}, 0)

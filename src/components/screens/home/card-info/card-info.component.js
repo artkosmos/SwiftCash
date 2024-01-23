@@ -35,20 +35,20 @@ export class CardInfo extends ChildComponent {
 		this.fetchData()
 	}
 
-	#destroy() {
+	destroy() {
 		this.#removeListeners()
 	}
 
 	#copyCardNumber(e) {
 		navigator.clipboard.writeText(e.target.innerText).then(() => {
 			e.target.innerText = 'Card number copied'
-			e.target.style.color = 'seagreen';
-			e.target.style.fontSize = '14px';
+			e.target.style.color = 'seagreen'
+			e.target.style.fontSize = '14px'
 
 			setTimeout(() => {
 				e.target.innerText = formatCardNumberSpace(this.card.cardNumber)
-				e.target.style.color = 'white';
-				e.target.style.fontSize = '18px';
+				e.target.style.color = 'white'
+				e.target.style.fontSize = '18px'
 			}, 2000)
 		})
 	}
@@ -59,15 +59,17 @@ export class CardInfo extends ChildComponent {
 	}
 
 	fetchData() {
-		setTimeout(() => {
-			this.cardService.myCard(data => {
-				if (data?._id) {
-					this.card = data
-					this.fillElements()
-					this.store.updateCard(data)
-				}
-			})
-		}, 0)
+		this.cardService.myCard(data => {
+			if (!data) {
+				return
+			}
+
+			if (data._id) {
+				this.card = data
+				this.fillElements()
+				this.store.updateCard(data)
+			}
+		})
 	}
 
 	fillElements() {
@@ -94,7 +96,9 @@ export class CardInfo extends ChildComponent {
 
 	render() {
 		if (this.store.state.user) {
-			this.fetchData()
+			setTimeout(() => {
+				this.fetchData()
+			}, 0)
 		}
 		return this.element
 	}
