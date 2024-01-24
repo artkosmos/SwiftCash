@@ -8,9 +8,11 @@ import { $SQuery } from '@/core/customQuery/query.lib'
 import { Field } from '@/components/ui/text-field/text-field.component'
 import formService from '@/core/services/form.service'
 import validationService from '@/core/services/validation.service'
+import { Loader } from '@/components/ui/loader/loader.component'
 
 export class Auth extends BaseScreen {
 	#isLoginForm = true
+	#responseLoading = false
 
 	constructor() {
 		super({ title: 'Auth' })
@@ -49,14 +51,24 @@ export class Auth extends BaseScreen {
 	}
 
 	#submitHandler(event) {
+		this.#responseLoading = true
+
+		const waiting = $SQuery(this.element).find('button')
+		const span = $SQuery(this.element).find('span')
+		waiting.append(new Loader(30,30).render()).addClassName(styles.loadingButton)
+
+		const loadingDescriptionTimer = setTimeout(() => {
+			span.text('Server wakes up. It might takes a while')
+		}, 1000)
+
 		const formValues = formService.getFormValues(event.target)
 		if (!this.#validate(formValues)) return
 		const type = this.#isLoginForm ? 'login' : 'register'
 		console.log(formValues)
 		if (type === 'login') {
-			this.authService.logIn(formValues)
+			this.authService.logIn(formValues).finally(() => clearTimeout(loadingDescriptionTimer))
 		} else {
-			this.authService.signUp(formValues)
+			this.authService.signUp(formValues).finally(() => clearTimeout(loadingDescriptionTimer))
 		}
 	}
 

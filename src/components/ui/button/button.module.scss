@@ -4,6 +4,8 @@
 
 .button {
   @include transition(background-color);
+  display: flex;
+  gap: 5px;
   background-color: $gray;
   color: $white;
   border-radius: 10px;

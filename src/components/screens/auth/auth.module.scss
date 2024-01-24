@@ -19,6 +19,15 @@
       margin-bottom: 1.5rem;
     }
 
+    .waiting {
+      color: $text;
+      margin: 10px auto 0;
+    }
+
+    .loadingButton {
+      padding: 12px 15px;
+    }
+
     > footer {
       text-align: right;
 
