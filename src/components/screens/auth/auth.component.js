@@ -58,7 +58,7 @@ export class Auth extends BaseScreen {
 		waiting.append(new Loader(30,30).render()).addClassName(styles.loadingButton)
 
 		const loadingDescriptionTimer = setTimeout(() => {
-			span.text('Server wakes up. It might takes a while')
+			span.text('Server wakes up. It might take a while')
 		}, 1000)
 
 		const formValues = formService.getFormValues(event.target)
