@@ -53,18 +53,17 @@ export class Auth extends BaseScreen {
 	#submitHandler(event) {
 		this.#responseLoading = true
 
-		const waiting = $SQuery(this.element).find('button')
+		const submitButton = $SQuery(this.element).find('form').find('.submitButton').find('button')
 		const span = $SQuery(this.element).find('span')
-		waiting.append(new Loader(30,30).render()).addClassName(styles.loadingButton)
+		submitButton.addClassName(styles.loadingButton).append(new Loader(30,30).render())
 
 		const loadingDescriptionTimer = setTimeout(() => {
 			span.text('Server wakes up. It might take a while')
-		}, 1000)
+		}, 10000)
 
 		const formValues = formService.getFormValues(event.target)
 		if (!this.#validate(formValues)) return
 		const type = this.#isLoginForm ? 'login' : 'register'
-		console.log(formValues)
 		if (type === 'login') {
 			this.authService.logIn(formValues).finally(() => clearTimeout(loadingDescriptionTimer))
 		} else {
